@@ -47,7 +47,18 @@ jobs:
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-        
+    
+    - name: 'Create env file'
+        run: |
+          touch .env
+          echo PORT=8080 >> .env
+          echo TOKEN=123 >> .env
+          echo REFRESH_TOKEN=123 >> .env
+          echo USER=${{ env.MONGO_ATLAS_USER }} >> .env
+          echo PASS=${{ env.MONGO_ATLAS_PWD }} >> .env
+          echo DB=${{ env.MONGO_ATLAS_DB }} >> .env
+          cat .env
+
     - uses: actions/checkout@v2
     - name: Deploy to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12 # This is the action

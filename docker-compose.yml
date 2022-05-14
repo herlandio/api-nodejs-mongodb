@@ -2,10 +2,6 @@ version: "3.9"
 services:
   web:
     build: .
-    environment:
-      USER: ${{MONGO_ATLAS_USER}}
-      PASS: ${{MONGO_ATLAS_PWD}}
-      DB: ${{MONGO_ATLAS_DB}}
     ports:
       - "8080:8080"
     volumes:
