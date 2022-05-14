@@ -48,7 +48,6 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
     
-  deploy:
     - uses: actions/checkout@v2
     - name: Deploy to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
