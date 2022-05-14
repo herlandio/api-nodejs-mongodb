@@ -3,9 +3,9 @@ services:
   web:
     build: .
     environment:
-      MONGO_ATLAS_USER: ${{MONGO_ATLAS_USER}}
-      MONGO_ATLAS_PWD: ${{MONGO_ATLAS_PWD}}
-      MONGO_ATLAS_DB: ${{MONGO_ATLAS_DB}}
+      USER: ${{MONGO_ATLAS_USER}}
+      PASS: ${{MONGO_ATLAS_PWD}}
+      DB: ${{MONGO_ATLAS_DB}}
     ports:
       - "8080:8080"
     volumes:
