@@ -58,6 +58,6 @@ jobs:
         usedocker: true
         env_file: ".env"
       env:
-        HD_MONGO_ATLAS_USER: ${{ env.MONGO_ATLAS_USER }}
-        HD_MONGO_ATLAS_PWD: ${{ env.MONGO_ATLAS_PWD }}
-        HD_MONGO_ATLAS_DB: ${{ env.MONGO_ATLAS_DB }}
+        MONGO_ATLAS_USER: ${{ env.MONGO_ATLAS_USER }}
+        MONGO_ATLAS_PWD: ${{ env.MONGO_ATLAS_PWD }}
+        MONGO_ATLAS_DB: ${{ env.MONGO_ATLAS_DB }}
