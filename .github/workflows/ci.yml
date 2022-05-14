@@ -66,4 +66,4 @@ jobs:
       env:
         USER: ${{ env.MONGO_ATLAS_USER }}
         PASS: ${{ env.MONGO_ATLAS_PWD }}
-        PASS: ${{ env.MONGO_ATLAS_DB }}
+        DB: ${{ env.MONGO_ATLAS_DB }}
