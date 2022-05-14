@@ -50,14 +50,14 @@ jobs:
     
     - name: 'Create env file'
       run: |
-        touch apimypharmatest/.env
+        touch ./apimypharmatest/.env
         echo PORT=8080 >> .env
         echo TOKEN=123 >> .env
         echo REFRESH_TOKEN=123 >> .env
         echo USER=${MONGO_ATLAS_USER} >> .env
         echo PASS=${MONGO_ATLAS_PWD} >> .env
         echo DB=${MONGO_ATLAS_DB} >> .env
-        cat apimypharmatest/.env
+        cat ./apimypharmatest/.env
       env: 
         MONGO_ATLAS_USER: ${{ env.MONGO_ATLAS_USER }} 
         MONGO_ATLAS_PWD: ${{ env.MONGO_ATLAS_PWD }}
