@@ -58,6 +58,7 @@ jobs:
         echo PASS=${MONGO_ATLAS_PWD} >> .env
         echo DB=${MONGO_ATLAS_DB} >> .env
         cat .env
+        mv .env /apimypharmatest/.env
       env: 
         MONGO_ATLAS_USER: ${{ env.MONGO_ATLAS_USER }} 
         MONGO_ATLAS_PWD: ${{ env.MONGO_ATLAS_PWD }}
