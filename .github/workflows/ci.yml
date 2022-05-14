@@ -54,10 +54,14 @@ jobs:
         echo PORT=8080 >> .env
         echo TOKEN=123 >> .env
         echo REFRESH_TOKEN=123 >> .env
-        echo USER=${{ env.MONGO_ATLAS_USER }} >> .env
-        echo PASS=${{ env.MONGO_ATLAS_PWD }} >> .env
-        echo DB=${{ env.MONGO_ATLAS_DB }} >> .env
+        echo USER=${MONGO_ATLAS_USER} >> .env
+        echo PASS=${MONGO_ATLAS_PWD} >> .env
+        echo DB=${MONGO_ATLAS_DB} >> .env
         cat .env
+      env: 
+        MONGO_ATLAS_USER: ${{ env.MONGO_ATLAS_USER }} 
+        MONGO_ATLAS_PWD: ${{ env.MONGO_ATLAS_PWD }}
+        MONGO_ATLAS_DB: ${{ env.MONGO_ATLAS_DB }} 
 
     - uses: actions/checkout@v2
     - name: Deploy to Heroku
