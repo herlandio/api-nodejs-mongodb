@@ -47,10 +47,7 @@ jobs:
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-
-  deploy: 
-    runs-on: ubuntu-latest
-    steps: 
+        
     - uses: actions/checkout@v2
     - name: Deploy to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
@@ -67,4 +64,4 @@ jobs:
         USER: ${{ env.MONGO_ATLAS_USER }}
         PASS: ${{ env.MONGO_ATLAS_PWD }}
         DB: ${{ env.MONGO_ATLAS_DB }}
-      
+    
