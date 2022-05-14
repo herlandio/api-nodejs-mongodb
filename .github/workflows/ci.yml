@@ -47,7 +47,7 @@ jobs:
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-        
+
   deploy: 
     runs-on: ubuntu-latest
     steps: 
@@ -59,3 +59,11 @@ jobs:
         heroku_app_name: api-nodemongo #Must be unique in Heroku
         heroku_email: herlandio7@gmail.com
         usedocker: true
+        docker_build_args: |
+            USER
+            PASS
+            DB
+      env:
+        USER: ${{ env.MONGO_ATLAS_USER }}
+        PASS: ${{ env.MONGO_ATLAS_PWD }}
+        PASS: ${{ env.MONGO_ATLAS_DB }}
