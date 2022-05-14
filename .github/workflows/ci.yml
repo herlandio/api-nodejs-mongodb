@@ -56,6 +56,7 @@ jobs:
         heroku_app_name: api-nodemongo #Must be unique in Heroku
         heroku_email: herlandio7@gmail.com
         usedocker: true
+        env_file: ".env"
       env:
         HD_MONGO_ATLAS_USER: ${{ env.MONGO_ATLAS_USER }}
         HD_MONGO_ATLAS_PWD: ${{ env.MONGO_ATLAS_PWD }}
