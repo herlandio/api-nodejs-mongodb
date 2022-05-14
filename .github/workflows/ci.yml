@@ -26,7 +26,11 @@ jobs:
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
-
+      secrets: |
+          "USER = ${{ env.MONGO_ATLAS_USER }}"
+          "PASS = ${{ env.MONGO_ATLAS_PWD }}"
+          "DB = ${{ env.MONGO_ATLAS_DB }}"
+          
     - name: Login to Docker Hub
       if: github.event_name != 'pull_request'
       uses: docker/login-action@v2
@@ -47,10 +51,6 @@ jobs:
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-        secrets: |
-          "USER = ${{ env.MONGO_ATLAS_USER }}"
-          "PASS = ${{ env.MONGO_ATLAS_PWD }}"
-          "DB = ${{ env.MONGO_ATLAS_DB }}"
     
     - uses: actions/checkout@v2
     - name: Deploy to Heroku
