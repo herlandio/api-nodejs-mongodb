@@ -12,6 +12,9 @@ env:
   DOCKERHUB_USER: ${{ secrets.DOCKER_USER }}
   DOCKERHUB_TOKEN: ${{ secrets.DOCKER_TOKEN }}
   HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+  MONGO_ATLAS_USER: ${{ MONGO_ATLAS_USER }}
+  MONGO_ATLAS_PWD: ${{ MONGO_ATLAS_PWD }}
+  MONGO_ATLAS_DB: ${{ MONGO_ATLAS_DB }}
 
 jobs:
   build:
@@ -44,6 +47,10 @@ jobs:
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+        env: |
+          MONGO_ATLAS_USER: ${{ env.MONGO_ATLAS_USER }}
+          MONGO_ATLAS_PWD: ${{ env.MONGO_ATLAS_PWD }}
+          MONGO_ATLAS_DB: ${{ env.MONGO_ATLAS_DB }}
     
     - uses: actions/checkout@v2
     - name: Deploy to Heroku
