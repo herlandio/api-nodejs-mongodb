@@ -47,7 +47,7 @@ jobs:
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-    
+        
     - uses: actions/checkout@v2
     - name: Deploy to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
@@ -56,3 +56,11 @@ jobs:
         heroku_app_name: api-nodemongo #Must be unique in Heroku
         heroku_email: herlandio7@gmail.com
         usedocker: true
+        docker_build_args: |
+          MONGO_ATLAS_USER
+          MONGO_ATLAS_PWD
+          MONGO_ATLAS_DB
+      env:
+        MONGO_ATLAS_USER: ${{ secrets.MONGO_ATLAS_USER }}
+        MONGO_ATLAS_PWD: ${{ secrets.MONGO_ATLAS_PWD }}
+        MONGO_ATLAS_DB: ${{ secrets.MONGO_ATLAS_DB }}
