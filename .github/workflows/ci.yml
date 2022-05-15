@@ -1,4 +1,4 @@
-name: ci
+name: ci/cd
 
 on:
   push:
@@ -12,6 +12,7 @@ env:
   DOCKERHUB_USER: ${{ secrets.DOCKER_USER }}
   DOCKERHUB_TOKEN: ${{ secrets.DOCKER_TOKEN }}
   HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+  HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
   MONGO_ATLAS_USER: ${{secrets.MONGO_ATLAS_USER}}
   MONGO_ATLAS_PWD: ${{secrets.MONGO_ATLAS_PWD}}
   MONGO_ATLAS_DB: ${{secrets.MONGO_ATLAS_DB}}
@@ -49,14 +50,18 @@ jobs:
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-          
+        
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
     - uses: actions/checkout@v2
     - name: Deploy to Heroku
-      uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      uses: akhileshns/heroku-deploy@v3.12.12
       with:
         heroku_api_key: ${{ env.HEROKU_API_KEY }}
-        heroku_app_name: api-nodemongo #Must be unique in Heroku
-        heroku_email: herlandio7@gmail.com
+        heroku_app_name: api-nodemongo
+        heroku_email: ${{ env.HEROKU_EMAIL }}
         usedocker: true
         docker_build_args: |
           ARG_USER
@@ -65,8 +70,8 @@ jobs:
           ARG_TOKEN
           ARG_REFRESH_TOKEN
       env:
-        ARG_USER: ${{env.MONGO_ATLAS_USER}}
-        ARG_PASS: ${{env.MONGO_ATLAS_PWD}}
-        ARG_DB: ${{env.MONGO_ATLAS_DB}}
-        ARG_TOKEN: ${{env.APP_TOKEN}}
-        ARG_REFRESH_TOKEN: ${{env.APP_REFRESH_TOKEN}}
+        ARG_USER: ${{ env.MONGO_ATLAS_USER }}
+        ARG_PASS: ${{ env.MONGO_ATLAS_PWD }}
+        ARG_DB: ${{ env.MONGO_ATLAS_DB }}
+        ARG_TOKEN: ${{ env.APP_TOKEN }}
+        ARG_REFRESH_TOKEN: ${{ env.APP_REFRESH_TOKEN }}
