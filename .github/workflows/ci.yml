@@ -59,6 +59,6 @@ jobs:
           VAR_PASS
           VAR_DB
       env:
-        VAR_PASS: "echo ${{ env.MONGO_ATLAS_PWD }}"
-        VAR_DB: "echo ${{ env.MONGO_ATLAS_DB }}"
+        VAR_PASS: ${{ env.MONGO_ATLAS_PWD }}
+        VAR_DB: ${{ env.MONGO_ATLAS_DB }}
     
