@@ -3,8 +3,8 @@ services:
   web:
     build: .
     environment:
-      - PASS=VAR_PASS
-      - DB=VAR_DB
+      - PASS=${$VAR_PASS}
+      - DB=${VAR_DB}
     ports:
       - "8080:8080"
     volumes:
