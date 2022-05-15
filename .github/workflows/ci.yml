@@ -12,6 +12,8 @@ env:
   DOCKERHUB_USER: ${{ secrets.DOCKER_USER }}
   DOCKERHUB_TOKEN: ${{ secrets.DOCKER_TOKEN }}
   HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+  MONGO_ATLAS_PWD: ${{ secrets.MONGO_ATLAS_PWD }}
+  MONGO_ATLAS_DB: ${{ secrets.MONGO_ATLAS_DB }}
 
 jobs:
   build:
@@ -53,4 +55,10 @@ jobs:
         heroku_app_name: api-nodemongo #Must be unique in Heroku
         heroku_email: herlandio7@gmail.com
         usedocker: true
+        docker_build_args: | 
+          VAR_PASS
+          VAR_DB
+      env:
+        VAR_PASS: ${{ env.MONGO_ATLAS_PWD }}
+        VAR_DB: ${{ env.MONGO_ATLAS_DB }}
     
