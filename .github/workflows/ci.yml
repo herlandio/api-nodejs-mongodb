@@ -56,9 +56,9 @@ jobs:
         heroku_email: herlandio7@gmail.com
         usedocker: true
         docker_build_args: | 
-          VAR_PASS
-          VAR_DB
+          PASS
+          DB
       env:
-        VAR_PASS: ${{ env.MONGO_ATLAS_PWD }}
-        VAR_DB: ${{ env.MONGO_ATLAS_DB }}
+        PASS: ${{ env.MONGO_ATLAS_PWD }}
+        DB: ${{ env.MONGO_ATLAS_DB }}
     
