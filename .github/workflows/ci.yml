@@ -55,10 +55,4 @@ jobs:
         heroku_app_name: api-nodemongo #Must be unique in Heroku
         heroku_email: herlandio7@gmail.com
         usedocker: true
-        docker_build_args: | 
-          VAR_PASS
-          VAR_DB
-      env:
-        VAR_PASS: ${{ env.MONGO_ATLAS_PWD }}
-        VAR_DB: ${{ env.MONGO_ATLAS_DB }}
     
