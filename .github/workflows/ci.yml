@@ -35,15 +35,7 @@ jobs:
       uses: docker/metadata-action@v3.6.0
       with:
         images: ${{ env.REGISTER }}/${{ env.IMAGE }}
-        tags: type=sha,format=long
-
-    - name: create env file
-      run: |
-        touch .env
-        echo PASS=${MONGO_ATLAS_PWD} >> .env
-        cat .env
-      env: 
-        MONGO_ATLAS_PWD: ${{ secrets.MONGO_ATLAS_PWD }} 
+        tags: type=sha,format=long 
 
     - name: Build and Push container images
       uses: docker/build-push-action@v2
@@ -61,3 +53,7 @@ jobs:
         heroku_app_name: api-nodemongo #Must be unique in Heroku
         heroku_email: herlandio7@gmail.com
         usedocker: true
+        docker_build_args: |
+          ARG_PASS
+      env:
+        ARG_PASS: ${{secrets.MONGO_ATLAS_PWD}}
