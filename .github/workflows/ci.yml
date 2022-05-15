@@ -30,8 +30,8 @@ jobs:
     
 
     steps:
-      - name: Teste
-        run: "echo Olá";
+    - name: Teste
+      run: "echo Olá";
 
   build:
     needs: test
