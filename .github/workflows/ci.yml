@@ -47,7 +47,7 @@ jobs:
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-        
+
     - uses: actions/checkout@v2
     - name: Deploy to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
@@ -57,11 +57,11 @@ jobs:
         heroku_email: herlandio7@gmail.com
         usedocker: true
         docker_build_args: | 
-          USER 
-          PASS
-          DB
+          VAR_USER 
+          VAR_PASS
+          VAR_DB
       env:
-        USER: ${{ env.MONGO_ATLAS_USER }}
-        PASS: ${{ env.MONGO_ATLAS_PWD }}
-        DB: ${{ env.MONGO_ATLAS_DB }}
+        VAR_USER: ${{ env.MONGO_ATLAS_USER }}
+        VAR_PASS: ${{ env.MONGO_ATLAS_PWD }}
+        VAR_DB: ${{ env.MONGO_ATLAS_DB }}
     
