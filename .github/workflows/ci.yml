@@ -40,8 +40,10 @@ jobs:
     - name: create env file
       run: |
         touch .env
-        echo PASS=${{ secrets.MONGO_ATLAS_PWD }} >> .env
+        echo PASS=${MONGO_ATLAS_PWD} >> .env
         cat .env
+      env: 
+        MONGO_ATLAS_PWD: ${{ secrets.MONGO_ATLAS_PWD }} 
 
     - name: Build and Push container images
       uses: docker/build-push-action@v2
