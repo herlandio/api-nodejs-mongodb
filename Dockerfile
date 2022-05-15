@@ -1,8 +1,8 @@
 FROM node:16.13.2
 
-ENV USER $VAR_USER
-ENV PASS $VAR_PASS
-ENV DB $VAR_DB 
+ARG USER $VAR_USER
+ARG PASS $VAR_PASS
+ARG DB $VAR_DB 
 
 WORKDIR /apimypharmatest
 COPY ["package.json", "package-lock.json*", "./"]
