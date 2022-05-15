@@ -3,7 +3,6 @@ services:
   web:
     build: .
     environment:
-      USER: VAR_USER
       PASS: VAR_PASS
       DB: VAR_DB
     ports:
