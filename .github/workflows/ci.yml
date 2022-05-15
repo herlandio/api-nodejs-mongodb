@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 env:
-  REGISTER: docker.io
+  REGISTRY: docker.io
   IMAGE: herlandio7/apinodemongo
   DOCKERHUB_USER: ${{ secrets.DOCKER_USER }}
   DOCKERHUB_TOKEN: ${{ secrets.DOCKER_TOKEN }}
@@ -39,7 +39,7 @@ jobs:
     - id: meta
       uses: docker/metadata-action@v3.6.0
       with:
-        images: ${{ env.REGISTER }}/${{ env.IMAGE }}
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE }}
         tags: type=sha,format=long 
 
     - name: Build and Push container images
