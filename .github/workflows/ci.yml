@@ -61,7 +61,7 @@ jobs:
           VAR_PASS
           VAR_DB
       env:
-        VAR_USER: ${{ env.MONGO_ATLAS_USER }}
+        VAR_USER: herlandio7
         VAR_PASS: ${{ env.MONGO_ATLAS_PWD }}
         VAR_DB: ${{ env.MONGO_ATLAS_DB }}
     
