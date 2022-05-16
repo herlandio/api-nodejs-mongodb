@@ -82,7 +82,7 @@ jobs:
       with:
         platforms: linux/amd64
         push: ${{ github.event_name != 'pull_request' }}
-        tags: ${{ steps.tagging.outputs.new_version }}
+        tags: herlandio7/apinodemongo:${{ steps.tagging.outputs.new_version }}
         
   deploy:
     needs: [test, build]
