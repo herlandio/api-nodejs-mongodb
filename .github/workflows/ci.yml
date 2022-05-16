@@ -74,16 +74,16 @@ jobs:
     - name: Create a GitHub release
       uses: ncipollo/release-action@v1
       with:
-        tag: ${{ steps.tag_version.outputs.new_tag }}
-        name: Release ${{ steps.tag_version.outputs.new_tag }}
-        body: ${{ steps.tag_version.outputs.changelog }} 
+        tag: ${{ tag_version.outputs.new_tag }}
+        name: Release ${{ tag_version.outputs.new_tag }}
+        body: ${{ tag_version.outputs.changelog }} 
 
     - name: Build and Push container images
       uses: docker/build-push-action@v2
       with:
         platforms: linux/amd64
         push: ${{ github.event_name != 'pull_request' }}
-        tags: ${{ steps.tag_version.outputs.new_tag }}
+        tags: ${{ tag_version.outputs.new_tag }}
         
   deploy:
     needs: [test, build]
