@@ -47,6 +47,9 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       
     - name: Set up QEMU
@@ -85,9 +88,6 @@ jobs:
   deploy:
     needs: [test, build]
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
     - uses: actions/checkout@v2
     - name: Deploy to Heroku
