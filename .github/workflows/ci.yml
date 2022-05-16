@@ -70,9 +70,9 @@ jobs:
     - name: Create a GitHub release
       uses: ncipollo/release-action@v1
       with:
-        tag: ${{ steps.tag_version.outputs.new_tag }}
-        name: Release ${{ steps.tag_version.outputs.new_tag }}
-        body: ${{ steps.tag_version.outputs.changelog }} 
+        tag: ${{ env.IMAGE }}:${{ steps.tag_version.outputs.new_tag }}
+        name: Release ${{ env.IMAGE }}:${{ steps.tag_version.outputs.new_tag }}
+        body: ${{ env.IMAGE }}:${{ steps.tag_version.outputs.changelog }} 
 
     - name: Build and Push container images
       uses: docker/build-push-action@v2
