@@ -53,7 +53,7 @@ jobs:
       id: meta
       uses: crazy-max/ghaction-docker-meta@v1
       with:
-        images: l7r7/sample
+        images: herlandio7/apinodemongo
         tag-custom: latest
         tag-semver: |
           {{raw}}
