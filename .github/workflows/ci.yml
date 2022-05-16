@@ -3,7 +3,8 @@ name: ci/cd
 on:
   push:
     branches: [main]
-    tags: [ 'v*.*.*' ]
+    tags:        
+      - '**'
   pull_request:
     branches: [main]
 
@@ -31,7 +32,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [15.x]
+        node-version: [10.x, 12.x, 14.x, 15.x]
 
     steps:
 
@@ -47,9 +48,6 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
       
     - name: Set up QEMU
@@ -65,24 +63,23 @@ jobs:
         username: ${{ env.DOCKERHUB_USER }}
         password: ${{ env.DOCKERHUB_TOKEN }}
     
-    - uses: actions/checkout@v2
-    - name: Bump version and push tag
-      id: tag_version
-      uses: mathieudutour/github-tag-action@v6.0
+    - id: meta
+      uses: docker/metadata-action@v3.6.0
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }} 
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE }}
+        tags: type=sha,format=long 
 
     - name: Build and Push container images
       uses: docker/build-push-action@v2
       with:
         platforms: linux/amd64
         push: ${{ github.event_name != 'pull_request' }}
-        tags: ${{ steps.tag_version.outputs.new_tag }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
         
   deploy:
     needs: [test, build]
     runs-on: ubuntu-latest
-    
     steps:
     - uses: actions/checkout@v2
     - name: Deploy to Heroku
