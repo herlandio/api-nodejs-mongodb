@@ -3,6 +3,8 @@ name: ci/cd
 on:
   push:
     branches: [main]
+      tag:
+        - 'v*.*.*'
   pull_request:
     branches: [main]
 
@@ -65,7 +67,13 @@ jobs:
       uses: docker/metadata-action@v3.6.0
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE }}
-        tags: type=ref,enable=true,priority=600,prefix=,suffix=,event=tag 
+        tags: |
+          # minimal
+          type=match,pattern=\d.\d.\d
+          # define match group
+          type=match,pattern=v(.*),group=1
+          # use custom value instead of git tag
+          type=match,pattern=v(.*),group=1,value=v1.0.0 
 
     - name: Build and Push container images
       uses: docker/build-push-action@v2
