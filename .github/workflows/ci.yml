@@ -63,11 +63,14 @@ jobs:
         username: ${{ env.DOCKERHUB_USER }}
         password: ${{ env.DOCKERHUB_TOKEN }}
     
-    - id: meta
-      uses: docker/metadata-action@v3.6.0
+    - name: Docker meta
+      id: meta
+      uses: crazy-max/ghaction-docker-meta@v1
       with:
-        images: ${{ env.REGISTRY }}/${{ env.IMAGE }}
-        tags: type=sha,format=long 
+        images: l7r7/sample
+        tag-custom: latest
+        tag-semver: |
+          {{raw}} 
 
     - name: Build and Push container images
       uses: docker/build-push-action@v2
