@@ -49,7 +49,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-     - name: Docker meta
+    - name: Docker meta
       id: meta
       uses: crazy-max/ghaction-docker-meta@v1
       with:
@@ -57,7 +57,7 @@ jobs:
         tag-custom: latest
         tag-semver: |
           {{raw}}
-           
+
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
 
