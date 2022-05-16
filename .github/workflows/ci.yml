@@ -49,7 +49,15 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      
+     - name: Docker meta
+      id: meta
+      uses: crazy-max/ghaction-docker-meta@v1
+      with:
+        images: l7r7/sample
+        tag-custom: latest
+        tag-semver: |
+          {{raw}}
+           
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
 
@@ -61,16 +69,7 @@ jobs:
       uses: docker/login-action@v2
       with:
         username: ${{ env.DOCKERHUB_USER }}
-        password: ${{ env.DOCKERHUB_TOKEN }}
-    
-    - name: Docker meta
-      id: meta
-      uses: crazy-max/ghaction-docker-meta@v1
-      with:
-        images: l7r7/sample
-        tag-custom: latest
-        tag-semver: |
-          {{raw}} 
+        password: ${{ env.DOCKERHUB_TOKEN }} 
 
     - name: Build and Push container images
       uses: docker/build-push-action@v2
