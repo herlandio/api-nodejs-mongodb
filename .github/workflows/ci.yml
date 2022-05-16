@@ -65,7 +65,7 @@ jobs:
       uses: docker/metadata-action@v3.6.0
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE }}
-        tags: type=sha,format=long 
+        tags: type=ref,enable=true,priority=600,prefix=,suffix=,event=tag 
 
     - name: Build and Push container images
       uses: docker/build-push-action@v2
