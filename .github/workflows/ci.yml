@@ -9,7 +9,7 @@ on:
     branches: [main]
 
 env:
-  REGISTRY: docker.io
+  REGISTRY: ghcr.io
   IMAGE: herlandio7/apinodemongo
   
   DOCKERHUB_USER: ${{ secrets.DOCKER_USER }}
