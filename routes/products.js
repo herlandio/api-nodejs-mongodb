@@ -26,8 +26,16 @@ router.post('/create', function (req, res) {
             for(let field in err.errors) {
                 boxError.push({field: err.errors[field].message});
             }
+
+            /*
+            * #swagger.responses[400]
+            */
             fail(res, boxError, 400, 'bad request');
         } else {
+
+            /*
+            * #swagger.responses[201]
+            */
             success(res, {
                 name: name,
                 description: description,
@@ -57,6 +65,10 @@ router.put('/edit/:id', async function (req, res) {
 
     await UptProduct.save().then(edited => {
         if (edited === UptProduct) {
+
+            /*
+            * #swagger.responses[200]
+            */
             success(res, {
                 name: name,
                 description: description,
@@ -76,6 +88,10 @@ router.delete('/delete/:id', function (req, res) {
     const { id } = req.params;
 
     Product.findByIdAndDelete(id, function () {
+
+        /*
+        * #swagger.responses[200]
+        */
         success(res, '', 200, 'success', 'deleted');
     });
 });
@@ -84,6 +100,10 @@ router.delete('/delete/:id', function (req, res) {
  * Listagem de produtos
  */
 router.get('/list', async function(req, res) {
+
+    /*
+    * #swagger.responses[200]
+    */
     success(res, await Product.find(), 200, 'success', 'listed');
 });
 
@@ -105,6 +125,10 @@ router.get('/list/:search', async function(req, res) {
     } else {
         searchByText = { $text: { $search: search } };
     }
+
+    /*
+    * #swagger.responses[200]
+    */
     success(res, await Product.find(searchByText), 200, 'success', 'listed');
 });
 

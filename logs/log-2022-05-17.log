@@ -183,3 +183,15 @@
 127.0.0.1 - - [17/May/2022:22:50:34 +0000] "GET /docs/swagger-ui-standalone-preset.js HTTP/1.1" 304 -
 127.0.0.1 - - [17/May/2022:22:50:34 +0000] "GET /docs/swagger-ui-init.js HTTP/1.1" 200 14220
 127.0.0.1 - - [17/May/2022:22:50:34 +0000] "GET /docs/favicon-32x32.png HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2022:22:55:25 +0000] "GET /docs/ HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2022:22:55:25 +0000] "GET /docs/swagger-ui.css HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2022:22:55:25 +0000] "GET /docs/swagger-ui-bundle.js HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2022:22:55:25 +0000] "GET /docs/swagger-ui-standalone-preset.js HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2022:22:55:25 +0000] "GET /docs/swagger-ui-init.js HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2022:22:55:26 +0000] "GET /docs/favicon-32x32.png HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2022:22:59:17 +0000] "GET /docs/ HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2022:22:59:17 +0000] "GET /docs/swagger-ui.css HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2022:22:59:17 +0000] "GET /docs/swagger-ui-bundle.js HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2022:22:59:17 +0000] "GET /docs/swagger-ui-standalone-preset.js HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2022:22:59:17 +0000] "GET /docs/swagger-ui-init.js HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2022:22:59:18 +0000] "GET /docs/favicon-32x32.png HTTP/1.1" 304 -

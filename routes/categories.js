@@ -22,8 +22,16 @@ router.post('/create', function (req, res) {
             for(let field in err.errors) {
                 boxError.push({field: err.errors[field].message});
             }
+
+            /*
+            * #swagger.responses[400]
+            */
             fail(res, boxError, 400, 'bad request');
         } else {
+
+            /*
+            * #swagger.responses[201]
+            */
             success(res, {
                 name: name,
                 category: description
@@ -45,6 +53,10 @@ router.put('/edit/:id', async function (req, res) {
 
     await UptCategory.save().then(edited => {
         if (edited === UptCategory) {
+
+            /*
+            * #swagger.responses[200]
+            */
             success(res, {
                 name: name,
                 description: description
@@ -60,6 +72,10 @@ router.delete('/delete/:id', function (req, res) {
     const { id } = req.params;
 
     Category.findByIdAndDelete(id, function () {
+
+        /*
+        * #swagger.responses[200]
+        */
         success(res, '', 200, 'success', 'deleted');
     });
 });
@@ -68,6 +84,10 @@ router.delete('/delete/:id', function (req, res) {
  * Listagem de categorias
  */
 router.get('/list', async function(req, res) {
+
+    /*
+    * #swagger.responses[200]
+    */
     success(res, await Category.find(), 200, 'success', 'listed');
 });
 
@@ -87,6 +107,10 @@ router.get('/list/:search', async function(req, res) {
     } else {
         searchByText = { $text: { $search: search } };
     }
+
+    /*
+    * #swagger.responses[200]
+    */
     success(res, await Category.find(searchByText), 200, 'success', 'listed');
 });
 
