@@ -9,6 +9,8 @@ const fs = require('fs');
 const path = require('path');
 const moment = require('moment');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger/swagger_output.json');
 
 const usersRouter = require('./routes/users');
 const brandsRouter = require('./routes/brands');
@@ -30,7 +32,7 @@ app.use(logger('common', {
 }));
 
 app.use(cors({
-  origin:'http://localhost:3000'
+  origin:'*'
 }));
 
 app.use(express.json());
@@ -42,6 +44,7 @@ app.use('/users', usersRouter);
 app.use('/brands', Auth, brandsRouter);
 app.use('/categories', Auth, categoriesRouter);
 app.use('/products', Auth, productsRouter);
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
