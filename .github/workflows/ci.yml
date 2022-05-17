@@ -1,0 +1,101 @@
+name: ci/cd
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  REGISTRY: docker.io
+  IMAGE: herlandio7/apinodemongo
+  
+  DOCKERHUB_USER: ${{ secrets.DOCKER_USER }}
+  DOCKERHUB_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+  
+  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+  HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+  
+  MONGO_ATLAS_USER: ${{secrets.MONGO_ATLAS_USER}}
+  MONGO_ATLAS_PWD: ${{secrets.MONGO_ATLAS_PWD}}
+  MONGO_ATLAS_DB: ${{secrets.MONGO_ATLAS_DB}}
+
+  APP_TOKEN: ${{secrets.APP_TOKEN}}
+  APP_REFRESH_TOKEN: ${{secrets.APP_REFRESH_TOKEN}}
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x, 15.x]
+
+    steps:
+
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install dependencies
+      run: npm install
+    #- run: npm test
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Login to Docker Hub
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v2
+      with:
+        username: ${{ env.DOCKERHUB_USER }}
+        password: ${{ env.DOCKERHUB_TOKEN }}
+    
+    - id: meta
+      uses: docker/metadata-action@v3.6.0
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE }}
+        tags: type=sha,format=long 
+
+    - name: Build and Push container images
+      uses: docker/build-push-action@v2
+      with:
+        platforms: linux/amd64
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        
+  deploy:
+    needs: [test, build]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy to Heroku
+      uses: akhileshns/heroku-deploy@v3.12.12
+      with:
+        heroku_api_key: ${{ env.HEROKU_API_KEY }}
+        heroku_app_name: api-nodemongo
+        heroku_email: ${{ env.HEROKU_EMAIL }}
+        usedocker: true
+        docker_build_args: |
+          ARG_USER
+          ARG_PASS
+          ARG_DB
+          ARG_TOKEN
+          ARG_REFRESH_TOKEN
+      env:
+        ARG_USER: ${{ env.MONGO_ATLAS_USER }}
+        ARG_PASS: ${{ env.MONGO_ATLAS_PWD }}
+        ARG_DB: ${{ env.MONGO_ATLAS_DB }}
+        ARG_TOKEN: ${{ env.APP_TOKEN }}
+        ARG_REFRESH_TOKEN: ${{ env.APP_REFRESH_TOKEN }}
