@@ -26,7 +26,6 @@ router.post('/create', function (req, res) {
             for(let field in err.errors) {
                 boxError.push({field: err.errors[field].message});
             }
-<<<<<<< HEAD
 
             /*
             * #swagger.responses[400]
@@ -37,10 +36,6 @@ router.post('/create', function (req, res) {
             /*
             * #swagger.responses[201]
             */
-=======
-            fail(res, boxError, 400, 'bad request');
-        } else {
->>>>>>> 3e4eb2d440f912a7bd5ac9a3879d7ddecbc8242d
             success(res, {
                 name: name,
                 description: description,
@@ -70,13 +65,10 @@ router.put('/edit/:id', async function (req, res) {
 
     await UptProduct.save().then(edited => {
         if (edited === UptProduct) {
-<<<<<<< HEAD
 
             /*
             * #swagger.responses[200]
             */
-=======
->>>>>>> 3e4eb2d440f912a7bd5ac9a3879d7ddecbc8242d
             success(res, {
                 name: name,
                 description: description,
@@ -96,13 +88,10 @@ router.delete('/delete/:id', function (req, res) {
     const { id } = req.params;
 
     Product.findByIdAndDelete(id, function () {
-<<<<<<< HEAD
 
         /*
         * #swagger.responses[200]
         */
-=======
->>>>>>> 3e4eb2d440f912a7bd5ac9a3879d7ddecbc8242d
         success(res, '', 200, 'success', 'deleted');
     });
 });
@@ -111,13 +100,10 @@ router.delete('/delete/:id', function (req, res) {
  * Listagem de produtos
  */
 router.get('/list', async function(req, res) {
-<<<<<<< HEAD
 
     /*
     * #swagger.responses[200]
     */
-=======
->>>>>>> 3e4eb2d440f912a7bd5ac9a3879d7ddecbc8242d
     success(res, await Product.find(), 200, 'success', 'listed');
 });
 
@@ -139,13 +125,10 @@ router.get('/list/:search', async function(req, res) {
     } else {
         searchByText = { $text: { $search: search } };
     }
-<<<<<<< HEAD
 
     /*
     * #swagger.responses[200]
     */
-=======
->>>>>>> 3e4eb2d440f912a7bd5ac9a3879d7ddecbc8242d
     success(res, await Product.find(searchByText), 200, 'success', 'listed');
 });
 
