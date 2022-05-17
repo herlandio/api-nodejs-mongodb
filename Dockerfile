@@ -17,4 +17,8 @@ COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install --production
 COPY . .
 CMD ["node", "./bin/www"]
+<<<<<<< HEAD
 EXPOSE 8080
+=======
+EXPOSE 8080
+>>>>>>> 3e4eb2d440f912a7bd5ac9a3879d7ddecbc8242d

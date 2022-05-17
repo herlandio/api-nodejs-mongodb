@@ -24,6 +24,7 @@ env:
   APP_REFRESH_TOKEN: ${{secrets.APP_REFRESH_TOKEN}}
 
 jobs:
+<<<<<<< HEAD
 
   test:
     runs-on: ubuntu-latest
@@ -45,6 +46,9 @@ jobs:
 
   build:
     needs: test
+=======
+  build:
+>>>>>>> 3e4eb2d440f912a7bd5ac9a3879d7ddecbc8242d
     runs-on: ubuntu-latest
     steps:
       
@@ -76,7 +80,11 @@ jobs:
         labels: ${{ steps.meta.outputs.labels }}
         
   deploy:
+<<<<<<< HEAD
     needs: [test, build]
+=======
+    needs: build
+>>>>>>> 3e4eb2d440f912a7bd5ac9a3879d7ddecbc8242d
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -98,4 +106,8 @@ jobs:
         ARG_PASS: ${{ env.MONGO_ATLAS_PWD }}
         ARG_DB: ${{ env.MONGO_ATLAS_DB }}
         ARG_TOKEN: ${{ env.APP_TOKEN }}
+<<<<<<< HEAD
         ARG_REFRESH_TOKEN: ${{ env.APP_REFRESH_TOKEN }}
+=======
+        ARG_REFRESH_TOKEN: ${{ env.APP_REFRESH_TOKEN }}
+>>>>>>> 3e4eb2d440f912a7bd5ac9a3879d7ddecbc8242d

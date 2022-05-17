@@ -3,8 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+<<<<<<< HEAD
     "start": "nodemon ./bin/www",
     "swagger-autogen": "node ./swagger.js"
+=======
+    "start": "node ./bin/www"
+>>>>>>> 3e4eb2d440f912a7bd5ac9a3879d7ddecbc8242d
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -19,9 +23,13 @@
     "mongoose": "^6.2.5",
     "morgan": "~1.9.1",
     "uuid": "^8.3.2",
+<<<<<<< HEAD
     "dotenv": "^16.0.0",
     "swagger-autogen": "^2.21.0",
     "swagger-ui-express": "^4.1.4"
+=======
+    "dotenv": "^16.0.0"
+>>>>>>> 3e4eb2d440f912a7bd5ac9a3879d7ddecbc8242d
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

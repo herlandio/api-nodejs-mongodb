@@ -1,4 +1,8 @@
 node_modules
+<<<<<<< HEAD
 .idea
 .env
 ./logs/*
+=======
+.idea
+>>>>>>> 3e4eb2d440f912a7bd5ac9a3879d7ddecbc8242d
