@@ -32,7 +32,7 @@ app.use(logger('common', {
 }));
 
 app.use(cors({
-  origin:'*'
+  origin:'https://api-nodemongo.herokuapp.com'
 }));
 
 app.use(express.json());
