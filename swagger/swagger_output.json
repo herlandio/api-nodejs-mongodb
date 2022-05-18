@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "title": "REST API TEST",
+    "description": "Api de criação de marcas, categorias e produtos"
   },
   "host": "api-nodemongo.herokuapp.com",
   "basePath": "/",
@@ -13,7 +13,7 @@
   "paths": {
     "/users/create": {
       "post": {
-        "description": "",
+        "description": "Criação de usúarios",
         "parameters": [
           {
             "name": "body",
@@ -22,13 +22,13 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "email": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "password": {
-                  "example": "any"
+                  "type": "string"
                 }
               }
             }
@@ -46,7 +46,7 @@
     },
     "/users/login": {
       "post": {
-        "description": "",
+        "description": "Login de usúarios",
         "parameters": [
           {
             "name": "body",
@@ -55,10 +55,10 @@
               "type": "object",
               "properties": {
                 "email": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "password": {
-                  "example": "any"
+                  "type": "string"
                 }
               }
             }
@@ -79,7 +79,7 @@
     },
     "/users/refreshToken": {
       "post": {
-        "description": "",
+        "description": "Atualização de token",
         "parameters": [
           {
             "name": "body",
@@ -88,13 +88,13 @@
               "type": "object",
               "properties": {
                 "token": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "name": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "email": {
-                  "example": "any"
+                  "type": "string"
                 }
               }
             }
@@ -112,7 +112,7 @@
     },
     "/users/logout": {
       "post": {
-        "description": "",
+        "description": "Desloga usúarios",
         "parameters": [],
         "responses": {
           "200": {
@@ -123,7 +123,7 @@
     },
     "/brands/create": {
       "post": {
-        "description": "",
+        "description": "Criação de marcas",
         "parameters": [
           {
             "name": "body",
@@ -132,7 +132,7 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string"
                 }
               }
             }
@@ -150,7 +150,7 @@
     },
     "/brands/edit/{id}": {
       "put": {
-        "description": "",
+        "description": "Edição de marcas",
         "parameters": [
           {
             "name": "id",
@@ -165,7 +165,7 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string"
                 }
               }
             }
@@ -180,7 +180,7 @@
     },
     "/brands/delete/{id}": {
       "delete": {
-        "description": "",
+        "description": "Exclusão de marcas",
         "parameters": [
           {
             "name": "id",
@@ -198,7 +198,7 @@
     },
     "/brands/list": {
       "get": {
-        "description": "",
+        "description": "Listagem de marcas",
         "parameters": [],
         "responses": {
           "200": {
@@ -209,7 +209,7 @@
     },
     "/brands/list/{search}": {
       "get": {
-        "description": "",
+        "description": "Busca de marcas",
         "parameters": [
           {
             "name": "search",
@@ -227,7 +227,7 @@
     },
     "/categories/create": {
       "post": {
-        "description": "",
+        "description": "Criação de categorias",
         "parameters": [
           {
             "name": "body",
@@ -236,10 +236,10 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "description": {
-                  "example": "any"
+                  "type": "string"
                 }
               }
             }
@@ -257,7 +257,7 @@
     },
     "/categories/edit/{id}": {
       "put": {
-        "description": "",
+        "description": "Edição de categorias",
         "parameters": [
           {
             "name": "id",
@@ -272,10 +272,10 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "description": {
-                  "example": "any"
+                  "type": "string"
                 }
               }
             }
@@ -290,7 +290,7 @@
     },
     "/categories/delete/{id}": {
       "delete": {
-        "description": "",
+        "description": "Exclusão de categorias",
         "parameters": [
           {
             "name": "id",
@@ -308,7 +308,7 @@
     },
     "/categories/list": {
       "get": {
-        "description": "",
+        "description": "Listagem de categorias",
         "parameters": [],
         "responses": {
           "200": {
@@ -319,7 +319,7 @@
     },
     "/categories/list/{search}": {
       "get": {
-        "description": "",
+        "description": "Busca de categorias",
         "parameters": [
           {
             "name": "search",
@@ -347,7 +347,7 @@
     },
     "/products/create": {
       "post": {
-        "description": "",
+        "description": "Criação de categorias",
         "parameters": [
           {
             "name": "body",
@@ -356,22 +356,22 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "description": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "price": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "inventory": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "category": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "brand": {
-                  "example": "any"
+                  "type": "string"
                 }
               }
             }
@@ -389,7 +389,7 @@
     },
     "/products/edit/{id}": {
       "put": {
-        "description": "",
+        "description": "Edição de produtos",
         "parameters": [
           {
             "name": "id",
@@ -404,22 +404,22 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "description": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "price": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "inventory": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "category": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "brand": {
-                  "example": "any"
+                  "type": "string"
                 }
               }
             }
@@ -434,7 +434,7 @@
     },
     "/products/delete/{id}": {
       "delete": {
-        "description": "",
+        "description": "Exclusão de produtos",
         "parameters": [
           {
             "name": "id",
@@ -452,7 +452,7 @@
     },
     "/products/list": {
       "get": {
-        "description": "",
+        "description": "Listagem de produtos",
         "parameters": [],
         "responses": {
           "200": {
@@ -463,7 +463,7 @@
     },
     "/products/list/{search}": {
       "get": {
-        "description": "",
+        "description": "Busca de produtos",
         "parameters": [
           {
             "name": "search",

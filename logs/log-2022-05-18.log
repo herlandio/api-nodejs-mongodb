@@ -1,0 +1,7 @@
+127.0.0.1 - - [18/May/2022:20:35:39 +0000] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2022:20:35:39 +0000] "GET /favicon.ico HTTP/1.1" 404 55
+127.0.0.1 - - [18/May/2022:20:35:46 +0000] "GET /docs/ HTTP/1.1" 200 3103
+127.0.0.1 - - [18/May/2022:20:35:46 +0000] "GET /docs/swagger-ui.css HTTP/1.1" 200 143980
+127.0.0.1 - - [18/May/2022:20:35:46 +0000] "GET /docs/swagger-ui-standalone-preset.js HTTP/1.1" 200 339540
+127.0.0.1 - - [18/May/2022:20:35:46 +0000] "GET /docs/swagger-ui-init.js HTTP/1.1" 200 13118
+127.0.0.1 - - [18/May/2022:20:35:46 +0000] "GET /docs/swagger-ui-bundle.js HTTP/1.1" 200 1096221
