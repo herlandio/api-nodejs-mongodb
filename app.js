@@ -44,7 +44,7 @@ app.use('/users', usersRouter);
 app.use('/brands', Auth, brandsRouter);
 app.use('/categories', Auth, categoriesRouter);
 app.use('/products', Auth, productsRouter);
-app.use('/docs', cors(), swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
