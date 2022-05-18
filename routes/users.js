@@ -17,7 +17,6 @@ router.get('/', function (req, res) {
     * #swagger.responses[200]
     */
     success(res, 'Welcome to api test MyPharma', 200, 'success', 'welcome'); 
-
 });
 
 
