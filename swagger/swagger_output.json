@@ -5,10 +5,10 @@
     "title": "REST API",
     "description": ""
   },
-  "host": "https://api-nodemongo.herokuapp.com",
+  "host": "api-nodemongo.herokuapp.com",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/users/create": {
