@@ -32,7 +32,7 @@ app.use(logger('common', {
 }));
 
 app.use(cors({
-  origin:'https://api-nodemongo.herokuapp.com'
+  origin:'*'
 }));
 
 app.use(express.json());
@@ -40,10 +40,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', usersRouter);
-app.use('/users', usersRouter);
-app.use('/brands', Auth, brandsRouter);
-app.use('/categories', Auth, categoriesRouter);
-app.use('/products', Auth, productsRouter);
+app.use('/users', cors(), usersRouter);
+app.use('/brands', cors(), Auth, brandsRouter);
+app.use('/categories', cors(), Auth, categoriesRouter);
+app.use('/products', cors(), Auth, productsRouter);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // catch 404 and forward to error handler
