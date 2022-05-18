@@ -8,7 +8,7 @@
   "host": "api-nodemongo.herokuapp.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/users/create": {
