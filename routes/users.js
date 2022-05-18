@@ -17,12 +17,15 @@ router.get('/', function (req, res) {
     * #swagger.responses[200]
     */
     success(res, 'Welcome to api test MyPharma', 200, 'success', 'welcome'); 
+
 });
+
 
 /**
  * Criação de usúario
  */
 router.post('/create', async function (req, res) {
+
     const { name, email, password } = req.body;
     const boxError = [];
 
@@ -135,6 +138,7 @@ router.post("/refreshToken", (req, res) => {
 /**
  * Logout da api
  */
+
 router.post('/logout', function (req, res) {
        
     const { token } = req.body;
@@ -145,6 +149,7 @@ router.post('/logout', function (req, res) {
     * #swagger.responses[200]
     */
     success(res, '', 200, 'success', 'Logged out!');
+
 });
 
 module.exports = router;

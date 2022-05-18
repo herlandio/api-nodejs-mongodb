@@ -27,10 +27,14 @@ router.post('/create', function (req, res) {
             */
             fail(res, boxError, 400, 'bad request');
         } else {
+
+            /*
+            * #swagger.responses[201]
+            */
             success(res, {
                 name: name,
-            }, 201, 'success', 'created');//#swagger.responses[201]
-            
+            }, 201, 'success', 'created');
+
         }
     });
 });
