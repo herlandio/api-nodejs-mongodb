@@ -22,4 +22,15 @@ A API foi criada utilizando NodeJS com express, Logs em arquivos, Autenticação
   docker-compose up -d
   ```
   
-4. Para testar a api acesse a documentação as informações estarão lá.
+4. Uso da API
+  - Crie seu usuario no endpoint abaixo:
+
+```
+https://api-nodemongo.herokuapp.com/users/create
+```
+  - Logue na api no endpoint abaixo:
+```
+https://api-nodemongo.herokuapp.com/users/login
+```
+  - Copie o refresh_token retornado na chamada e use no bearer token nas chamadas dos endpoints
+  - Para saber mais sobre os endpoints acesse a documentação.
