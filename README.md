@@ -2,7 +2,8 @@
 
 A API foi criada utilizando NodeJS com express, Logs em arquivos, Autenticação JWT, MongoDB com Mongoose conectado no Cloud MongoDB Atlas.
 
-[Documentação da API](https://documenter.getpostman.com/view/15201113/UVsSP4Jj)
+- Postman [Documentação da API](https://documenter.getpostman.com/view/15201113/UVsSP4Jj)
+- Swagger [Documentação da API](https://api-nodemongo.herokuapp.com/docs)
 
 1. Clone o repositorio
   
@@ -20,3 +21,5 @@ A API foi criada utilizando NodeJS com express, Logs em arquivos, Autenticação
   ```   
   docker-compose up -d
   ```
+  
+4. Para testar a api acesse a documentação as informações estarão lá.
