@@ -30,6 +30,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions: 
       contents: write
+      actions: write
+      packages: write
+      repository-projects: write
+      
     steps:
     - uses: actions/checkout@v2
 
@@ -37,7 +41,7 @@ jobs:
       id: docker_meta
       uses: crazy-max/ghaction-docker-meta@v1
       with:
-        images: herlandio7/apinodemongo
+        images: ${{env.IMAGE}}
         tag-sha: true
 
     - name: Set up QEMU
@@ -72,7 +76,7 @@ jobs:
       with:
         platforms: linux/amd64
         push: true
-        tags: herlandio7/apinodemongo:${{ steps.tagging.outputs.new_version }}
+        tags: ${{env.IMAGE}}:${{ steps.tagging.outputs.new_version }}
         
   deploy:
     needs: [build]
