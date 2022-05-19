@@ -37,7 +37,7 @@ jobs:
       id: docker_meta
       uses: crazy-max/ghaction-docker-meta@v1
       with:
-        images: ${{env.IMAGE}}
+        images: herlandio7/apinodemongo
         tag-sha: true
 
     - name: Set up QEMU
@@ -48,7 +48,7 @@ jobs:
 
     - name: Login to Docker Hub
       if: github.event_name != 'pull_request'
-      uses: docker/login-action@v1
+      uses: docker/login-action@v2
       with:
         username: ${{ env.DOCKERHUB_USER }}
         password: ${{ env.DOCKERHUB_TOKEN }}
@@ -72,7 +72,7 @@ jobs:
       with:
         platforms: linux/amd64
         push: true
-        tags: ${{env.IMAGE}}:${{ steps.tagging.outputs.new_version }}
+        tags: herlandio7/apinodemongo:${{ steps.tagging.outputs.new_version }}
         
   deploy:
     needs: [build]
