@@ -52,9 +52,7 @@ jobs:
       uses: crazy-max/ghaction-docker-meta@v1
       with:
         images: ${{env.IMAGE}}
-        tag-custom: latest
-        tag-semver: |
-          {{raw}}
+        tag-sha: true
 
     - name: Build and push
       uses: docker/build-push-action@v3
