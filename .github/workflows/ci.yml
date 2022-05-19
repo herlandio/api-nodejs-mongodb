@@ -48,21 +48,21 @@ jobs:
         password: ${{ env.DOCKERHUB_TOKEN }}
     
     - name: Docker meta
-      id: meta
-      uses: docker/metadata-action@v4
+      id: docker_meta
+      uses: crazy-max/ghaction-docker-meta@v1
       with:
-        images: |
-          ${{env.IMAGE}}
-        tags: |
-          type=ref, event=tag 
+        images: ${{env.IMAGE}}
+        tag-custom: latest
+        tag-semver: |
+          {{raw}}
 
     - name: Build and push
       uses: docker/build-push-action@v3
       with:
         context: .
-        push: ${{ github.event_name != 'pull_request' }}
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
+        push: false
+        tags: ${{ steps.docker_meta.outputs.tags }}
+        labels: ${{ steps.docker_meta.outputs.labels }}
         
   deploy:
     needs: [build]
