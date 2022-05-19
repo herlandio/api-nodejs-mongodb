@@ -17,7 +17,6 @@
       "in": "header"
     }
   },
-  "security": [ {"Bearer": []} ],
   "paths": {
     "/users/create": {
       "post": {
@@ -153,7 +152,8 @@
           "400": {
             "description": "Bad Request"
           }
-        }
+        },
+        "security": [ {"Bearer": []} ]
       }
     },
     "/brands/edit/{id}": {
@@ -183,7 +183,8 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [ {"Bearer": []} ]
       }
     },
     "/brands/delete/{id}": {
@@ -201,7 +202,8 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [ {"Bearer": []} ]
       }
     },
     "/brands/list": {
@@ -212,7 +214,8 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [ {"Bearer": []} ]
       }
     },
     "/brands/list/{search}": {
@@ -230,7 +233,8 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [ {"Bearer": []} ]
       }
     },
     "/categories/create": {
@@ -260,7 +264,8 @@
           "400": {
             "description": "Bad Request"
           }
-        }
+        },
+        "security": [ {"Bearer": []} ]
       }
     },
     "/categories/edit/{id}": {
@@ -293,7 +298,8 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [ {"Bearer": []} ]
       }
     },
     "/categories/delete/{id}": {
@@ -311,7 +317,8 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [ {"Bearer": []} ]
       }
     },
     "/categories/list": {
@@ -322,7 +329,8 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [ {"Bearer": []} ]
       }
     },
     "/categories/list/{search}": {
@@ -350,7 +358,8 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [ {"Bearer": []} ]
       }
     },
     "/products/create": {
@@ -392,7 +401,8 @@
           "400": {
             "description": "Bad Request"
           }
-        }
+        },
+        "security": [ {"Bearer": []} ]
       }
     },
     "/products/edit/{id}": {
@@ -437,7 +447,8 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [ {"Bearer": []} ]
       }
     },
     "/products/delete/{id}": {
@@ -455,7 +466,8 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [ {"Bearer": []} ]
       }
     },
     "/products/list": {
@@ -466,7 +478,8 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [ {"Bearer": []} ]
       }
     },
     "/products/list/{search}": {
@@ -504,7 +517,8 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [ {"Bearer": []} ]
       }
     }
   }
