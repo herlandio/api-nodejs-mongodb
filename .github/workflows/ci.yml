@@ -24,11 +24,11 @@ env:
   APP_REFRESH_TOKEN: ${{secrets.APP_REFRESH_TOKEN}}
 
 jobs:
-
+  permissions: read-all|write-all
   build:
     
     runs-on: ubuntu-latest
-    permissions: read-all|write-all
+    
     steps:
     - uses: actions/checkout@v2
 
