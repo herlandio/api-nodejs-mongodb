@@ -23,12 +23,10 @@ env:
   APP_TOKEN: ${{secrets.APP_TOKEN}}
   APP_REFRESH_TOKEN: ${{secrets.APP_REFRESH_TOKEN}}
 
-permissions: read-all|write-all
-
 jobs:
 
   build:
-
+    permissions: read-all|write-all
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
