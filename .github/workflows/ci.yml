@@ -54,7 +54,7 @@ jobs:
         images: |
           ${{env.IMAGE}}
         tags: |
-          type=ref,enable=true,priority=600,prefix=,suffix=,event=tag 
+          type=ref, event=tag 
 
     - name: Build and push
       uses: docker/build-push-action@v3
