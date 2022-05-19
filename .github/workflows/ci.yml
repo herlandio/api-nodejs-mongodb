@@ -54,13 +54,18 @@ jobs:
         images: ${{env.IMAGE}}
         tag-sha: true
 
+    - name: Bump version and push tag
+      id: tagging
+      uses: mathieudutour/github-tag-action@v4.5
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Build and push
       uses: docker/build-push-action@v3
       with:
+        push: true
         context: .
-        push: false
-        tags: ${{ steps.docker_meta.outputs.tags }}
-        labels: ${{ steps.docker_meta.outputs.labels }}
+        tags: ${{env.IMAGE}}:${{ steps.tagging.outputs.new_version }}
         
   deploy:
     needs: [build]
