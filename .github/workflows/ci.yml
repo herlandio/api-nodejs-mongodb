@@ -23,9 +23,12 @@ env:
   APP_TOKEN: ${{secrets.APP_TOKEN}}
   APP_REFRESH_TOKEN: ${{secrets.APP_REFRESH_TOKEN}}
 
+permissions: read-all|write-all
+
 jobs:
 
   build:
+
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -55,7 +58,7 @@ jobs:
       id: tag_version
       uses: mathieudutour/github-tag-action@v6.0
       with:
-        github_token: ${{ secrets.APPGIT_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Create a GitHub release
       uses: ncipollo/release-action@v1
