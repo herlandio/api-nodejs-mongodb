@@ -34,3 +34,8 @@ https://api-nodemongo.herokuapp.com/users/login
 ```
   - Copie o refresh_token retornado na chamada e use no bearer token nas chamadas dos endpoints
   - Para saber mais sobre os endpoints acesse a documentação.
+  - Ao utlizar o swagger o authorize deve ser no formato abaixo, conforme exemplo abaixo, substitua a palavra token pelo token.
+
+```
+bearer token
+```
