@@ -53,11 +53,13 @@ jobs:
       with:
         images: |
           ${{env.IMAGE}}
-        tags: |
-          type=ref,event=branch
-          type=ref,event=pr
-          type=semver,pattern={{version}}
-          type=semver,pattern={{major}}.{{minor}} 
+        tags: tags: |
+          # minimal
+          type=match,pattern=\d.\d.\d
+          # define match group
+          type=match,pattern=v(.*),group=1
+          # use custom value instead of git tag
+          type=match,pattern=v(.*),group=1,value=v1.0.0 
 
     - name: Build and push
       uses: docker/build-push-action@v3
