@@ -54,12 +54,8 @@ jobs:
         images: |
           ${{env.IMAGE}}
         tags: tags: |
-          # minimal
-          type=match,pattern=\d.\d.\d
-          # define match group
-          type=match,pattern=v(.*),group=1
-          # use custom value instead of git tag
-          type=match,pattern=v(.*),group=1,value=v1.0.0 
+          
+          type=match,pattern=\d.\d.\d 
 
     - name: Build and push
       uses: docker/build-push-action@v3
