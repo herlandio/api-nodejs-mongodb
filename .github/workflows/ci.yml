@@ -26,8 +26,9 @@ env:
 jobs:
 
   build:
-    permissions: read-all|write-all
+    
     runs-on: ubuntu-latest
+    permissions: read-all|write-all
     steps:
     - uses: actions/checkout@v2
 
