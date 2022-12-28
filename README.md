@@ -1,4 +1,4 @@
-# API Nodejs e Mongodb
+# API Nodejs e Mongodb [Fora do ar]
 
 A API foi criada utilizando NodeJS com express, Logs em arquivos, Autenticação JWT, MongoDB com Mongoose conectado no Cloud MongoDB Atlas.
 
