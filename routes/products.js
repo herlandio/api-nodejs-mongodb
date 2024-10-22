@@ -12,7 +12,7 @@ router.post('/create', async function (req, res) {
     const { name, description, price, inventory, category, brand } = req.body;
     const boxError = [];
 
-    if (!name || !description || price === undefined || inventory === undefined || !category || !brand) {
+    if (!name || !description || !price || !inventory || !category || !brand) {
         /*
         * #swagger.responses[400]
         */

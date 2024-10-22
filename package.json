@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "swagger-autogen": "node ./swagger.js"
+    "swagger-autogen": "node ./swagger.js",
+    "test": "jest"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -18,12 +19,14 @@
     "mongodb": "^4.4.1",
     "mongoose": "^6.2.5",
     "morgan": "~1.9.1",
-    "uuid": "^8.3.2",
     "swagger-autogen": "^2.21.0",
-    "swagger-ui-express": "^4.1.4"
+    "swagger-ui-express": "^4.1.4",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "dotenv": "^16.0.0",
+    "jest": "^29.7.0",
     "nodemon": "^2.0.15",
-    "dotenv": "^16.0.0"
+    "supertest": "^7.0.0"
   }
 }
