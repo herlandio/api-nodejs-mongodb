@@ -3,115 +3,158 @@ var router = express.Router();
 const { v4: uuidv4 } = require('uuid');
 
 const Category = require('../types/categorySchema');
-const {success, fail} = require('../help/messages');
+const { success, fail } = require('../help/messages');
 
 /**
- * Criação de categorias
+ * Creates a category
  */
-router.post('/create', function (req, res) {
+router.post('/create', async function (req, res) {
     const { name, description } = req.body;
     const boxError = [];
 
-    const category = new Category();
-    category._id = uuidv4();
-    category.name = name;
-    category.description = description;
+    if (!name || !description) {
+        /*
+        * #swagger.responses[400]
+        */
+        return fail(res, 'Name and description are required', 400, 'bad request');
+    }
 
-    category.save(function (err) {
-        if (err) {
-            for(let field in err.errors) {
-                boxError.push({field: err.errors[field].message});
-            }
-
-            /*
-            * #swagger.responses[400]
-            */
-            fail(res, boxError, 400, 'bad request');
-        } else {
-
-            /*
-            * #swagger.responses[201]
-            */
-            success(res, {
-                name: name,
-                category: description
-            }, 201, 'success', 'created');
-        }
+    const category = new Category({
+        _id: uuidv4(),
+        name,
+        description
     });
+
+    try {
+        await category.save();
+        /*
+        * #swagger.responses[201]
+        */
+        success(res, category, 201, 'success', 'created');
+    } catch (err) {
+        for (let field in err.errors) {
+            boxError.push({ field: err.errors[field].message });
+        }
+        /*
+        * #swagger.responses[400]
+        */
+        fail(res, boxError, 400, 'bad request');
+    }
 });
 
 /**
- * Edição de categorias
+ * Edits a category
  */
 router.put('/edit/:id', async function (req, res) {
-    const { name, description } = req.body;
     const { id } = req.params;
+    const { name, description } = req.body;
 
-    const UptCategory = await Category.findById(id);
-    UptCategory.name = name;
-    UptCategory.description = description;
-
-    await UptCategory.save().then(edited => {
-        if (edited === UptCategory) {
-
+    try {
+        const UptCategory = await Category.findById(id);
+        if (!UptCategory) {
             /*
-            * #swagger.responses[200]
+            * #swagger.responses[404]
             */
-            success(res, {
-                name: name,
-                description: description
-            }, 200, 'success', 'updated');
+            return fail(res, 'Category not found', 404, 'not found');
         }
-    });
+
+        UptCategory.name = name || UptCategory.name;
+        UptCategory.description = description || UptCategory.description;
+
+        await UptCategory.save();
+        /*
+        * #swagger.responses[200]
+        */
+        success(res, UptCategory, 200, 'success', 'updated');
+    } catch (err) {
+        /*
+        * #swagger.responses[500]
+        */
+        fail(res, 'Error updating category', 500, 'server error');
+    }
 });
 
 /**
- * Remoção de categorias
+ * Deletes a category
  */
-router.delete('/delete/:id', function (req, res) {
+router.delete('/delete/:id', async function (req, res) {
     const { id } = req.params;
 
-    Category.findByIdAndDelete(id, function () {
-
+    try {
+        const deletedCategory = await Category.findByIdAndDelete(id);
+        if (!deletedCategory) {
+            /*
+            * #swagger.responses[404]
+            */
+            return fail(res, 'Category not found', 404, 'not found');
+        }
         /*
         * #swagger.responses[200]
         */
         success(res, '', 200, 'success', 'deleted');
-    });
+    } catch (err) {
+        /*
+        * #swagger.responses[500]
+        */
+        fail(res, 'Error deleting category', 500, 'server error');
+    }
 });
 
 /**
- * Listagem de categorias
+ * Lists all categories
  */
 router.get('/list', async function(req, res) {
-
-    /*
-    * #swagger.responses[200]
-    */
-    success(res, await Category.find(), 200, 'success', 'listed');
+    try {
+        const categories = await Category.find();
+        /*
+        * #swagger.responses[200]
+        */
+        success(res, categories, 200, 'success', 'listed');
+    } catch (err) {
+        /*
+        * #swagger.responses[500]
+        */
+        fail(res, 'Error listing categories', 500, 'server error');
+    }
 });
 
 /**
- * Busca e filtro de categorias
+ * Searches or filters categories
  */
 router.get('/list/:search', async function(req, res) {
-    const { name, description } = req.query;
     const { search } = req.params;
+    const { name, description } = req.query;
     let searchByText = {};
 
-    if (req.params.search === 'filter') {
-        searchByText = {
-            name: { $regex: new RegExp(name), $options: 'i' },
-            description: { $regex: new RegExp(description), $options: 'i' }
-        };
-    } else {
-        searchByText = { $text: { $search: search } };
-    }
+    try {
+        if (search === 'filter') {
+            searchByText = {
+                ...(name && { name: { $regex: new RegExp(name, 'i') } }),
+                ...(description && { description: { $regex: new RegExp(description, 'i') } })
+            };
+        } else {
+            searchByText = { $text: { $search: search } };
+        }
 
-    /*
-    * #swagger.responses[200]
-    */
-    success(res, await Category.find(searchByText), 200, 'success', 'listed');
+        const categories = await Category.find(searchByText);
+
+        if (categories.length === 0) {
+            /*
+            * #swagger.responses[404]
+            */
+            return fail(res, 'No categories found', 404, 'not found');
+        }
+        /*
+        * #swagger.responses[200]
+        */
+        success(res, categories, 200, 'success', 'listed');
+    } catch (err) {
+        console.error("Error searching categories:", err);
+        /*
+        * #swagger.responses[500]
+        */
+        fail(res, 'Error searching categories', 500, 'server error');
+    }
 });
 
 module.exports = router;

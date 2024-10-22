@@ -1,33 +1,33 @@
 /**
- * Geração de messagem sucesso
- * @param res
- * @param data
- * @param code
- * @param status
- * @param message
+ * Generates a success message
+ * @param {Object} res - HTTP response
+ * @param {Object|Array} data - Data to be sent in the response
+ * @param {number} code - HTTP status code
+ * @param {string} status - Response status (e.g., "success")
+ * @param {string} successMessage - Success message
  */
-const success = (res, data, code, status, message) => {
-    res.status(code).send({
+const success = (res, data, code, status, successMessage) => {
+    return res.status(code).send({
         data: data,
-        code: res.statusCode,
+        code: code,
         status: status,
-        message: message
-    }).end();
+        message: successMessage
+    });
 }
 
 /**
- * Geração de erro sucesso
- * @param res
- * @param boxError
- * @param code
- * @param status
+ * Generates an error message
+ * @param {Object} res - HTTP response
+ * @param {Array} boxError - List of errors
+ * @param {number} code - HTTP status code
+ * @param {string} status - Response status (e.g., "error")
  */
 const fail = (res, boxError, code, status) => {
-    res.status(code).send({
-        code: res.statusCode,
+    return res.status(code).send({
+        code: code,
         status: status,
         message: boxError
-    }).end();
+    });
 }
 
 module.exports = { success, fail }

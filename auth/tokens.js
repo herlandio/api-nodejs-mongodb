@@ -1,23 +1,41 @@
 const jwt = require("jsonwebtoken");
 
 /**
- * Criação de token
- * @param user
- * @returns {undefined|*}
+ * Generates an access token
+ * @param {Object} user - User information
+ * @returns {string|null} - Returns the access token or null in case of an error
  */
 const createAccessToken = (user) => {
-    return jwt.sign(user, process.env.TOKEN, {expiresIn: "15m"});
+    try {
+        const payload = {
+            id: user._id, 
+            role: user.role 
+        };
+        return jwt.sign(payload, process.env.TOKEN, { expiresIn: "15m" });
+    } catch (error) {
+        console.error("Error creating access token:", error);
+        return null;
+    }
 }
 
 /**
- * Atualização de token
- * @param user
- * @returns {undefined|*}
+ * Generates a refresh token
+ * @param {Object} user - User information
+ * @returns {string|null} - Returns the refresh token or null in case of an error
  */
 const createRefreshToken = (user) => {
-    return jwt.sign(user, process.env.REFRESH_TOKEN, {expiresIn: "20m"});
+    try {
+        const payload = {
+            id: user._id 
+        };
+        return jwt.sign(payload, process.env.REFRESH_TOKEN, { expiresIn: "20m" });
+    } catch (error) {
+        console.error("Error creating refresh token:", error);
+        return null;
+    }
 }
 
 module.exports = {
-    createAccessToken, createRefreshToken
+    createAccessToken,
+    createRefreshToken
 }

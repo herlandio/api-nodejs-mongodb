@@ -1,41 +1,48 @@
 const mongoose = require('mongoose');
 const Float = mongoose.Schema.Types.Decimal128;
+const { v4: uuidv4 } = require('uuid');
 
 /**
- * Tipos de dados e tratamento
+ * Product schema definition
  * @type {mongoose.Schema}
  */
-const productsSchema = new mongoose.Schema({
-    _id: String,
+const productSchema = new mongoose.Schema({
+    _id: {
+        type: String,
+        default: uuidv4,
+        required: true
+    },
     name: {
         type: String,
-        required: [true, 'Nome do produto?']
+        required: [true, 'Product name?']
     },
     description: {
         type: String,
-        required: [true, 'Descrição do produto?']
+        required: [true, 'Product description?']
     },
     price: {
         type: Float,
-        required: [true, 'Preço do produto?']
+        required: [true, 'Product price?']
     },
     inventory: {
         type: Number,
-        required: [true, 'Quantidade de produtos?']
+        required: [true, 'Quantity of products?']
     },
     category: {
         type: String,
-        required: [true, 'Categoria do produto?']
+        required: [true, 'Product category?']
     },
     brand: {
         type: String,
-        required: [true, 'Marca do produto?']
+        required: [true, 'Product brand?']
     }
-},{
-    collection:'products',
+}, {
+    collection: 'products',
     versionKey: false
 });
 
-const Products = mongoose.model('product', productsSchema);
+productSchema.index({ name: 'text', description: 'text', category: 'text', brand: 'text' });
 
-module.exports = Products;
+const Product = mongoose.model('Product', productSchema);
+
+module.exports = Product;

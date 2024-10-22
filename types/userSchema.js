@@ -1,15 +1,20 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const { v4: uuidv4 } = require('uuid');
 
 /**
- * Tipos de dados e tratamento
+ * User schema definition
  * @type {mongoose.Schema}
  */
 const userSchema = new mongoose.Schema({
-    _id: String,
+    _id: {
+        type: String,
+        default: uuidv4,
+        required: true
+    },
     name: {
         type: String,
-        required: [true, 'Qual o seu nome?']
+        required: [true, 'What is your name?']
     },
     email: {
         type: String,
@@ -20,29 +25,34 @@ const userSchema = new mongoose.Schema({
             validator: function(v) {
                 return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
             },
-            message: "Insira um email valido!"
+            message: "Please enter a valid email!"
         },
-        required: [true, 'Qual o seu email?']
+        required: [true, 'What is your email?']
     },
     password: {
         type: String,
-        minlength: [6, "O tamanho minimo é 6 caracteres!"],
-        maxlength: [12, "O tamanho maximo é 12 caracteres!"],
-        required: [true, 'Crie uma senha?']
+        minlength: [6, "The minimum length is 6 characters!"],
+        maxlength: [12, "The maximum length is 12 characters!"],
+        required: [true, 'Create a password?']
     }
-},{
-    collection:'users',
+}, {
+    collection: 'users',
     versionKey: false
 });
 
 /**
- * Antes de salvar gera hash de senha
+ * Before saving, generates a hash of the password
  */
 userSchema.pre("save", async function (next) {
-    if (this.isModified("password")){
-        this.password = await bcrypt.hash(this.password, 10);
+    try {
+        if (this.isModified("password")) {
+            this.password = await bcrypt.hash(this.password, 10);
+        }
+        next();
+    } catch (error) {
+        next(error);
     }
-    return next();
 });
 
-module.exports = mongoose.model('user', userSchema);
+// Exports the user model
+module.exports = mongoose.model('User', userSchema);
