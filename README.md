@@ -40,3 +40,8 @@ http://localhost:8080/users/login
 ```
 bearer token
 ```
+## Testes
+
+```
+docker exec -it api-nodejs-mongodb-web-1 npm test
+```
